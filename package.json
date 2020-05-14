@@ -1,0 +1,23 @@
+{
+  "name": "create-webpack-template",
+  "version": "1.0.0",
+  "description": "Easy create webpack template",
+  "main": "index.js",
+  "bin": {
+    "create-webpack-template": "bin/create-webpack-template"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andrei Glevchuk",
+  "license": "ISC",
+  "dependencies": {
+    "arg": "^4.1.3",
+    "chalk": "^4.0.0",
+    "esm": "^3.2.25",
+    "inquirer": "^7.1.0",
+    "ncp": "^2.0.0",
+    "prompt": "^1.0.0"
+  }
+}
