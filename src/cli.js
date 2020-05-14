@@ -9,5 +9,5 @@ export async function cli(args) {
 
 	createProjectDirectories(config.projectName);
 	copyStaticFiles(config);
-	installDependencies(config.projectName);
+	// installDependencies(config.projectName);
 }

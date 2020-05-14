@@ -6,12 +6,27 @@ export async function getConfigOptions() {
 			type: 'input',
 			name: 'projectName',
 			message: 'Enter a project name',
-			default: 'MyAwesomeProject',
+			default: 'my-awesome-project',
 			validate(value) {
 				return /^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(value)
 					? true
 					: 'Incorrect project name';
 			},
+		},
+		{
+			type: 'list',
+			name: 'gitignore',
+			message: 'Include .gitignore?',
+			choices: [
+				{
+					name: 'Yes',
+					value: true,
+				},
+				{
+					name: 'No',
+					value: false,
+				},
+			],
 		},
 		{
 			type: 'list',
@@ -38,15 +53,19 @@ export async function getConfigOptions() {
 		},
 		{
 			type: 'list',
-			name: 'gitignore',
-			message: 'Include .gitignore?',
+			name: 'cssUtil',
+			message: 'Choose your fighter',
 			choices: [
 				{
-					name: 'Yes',
-					value: true,
+					name: 'reset.css',
+					value: 'reset',
 				},
 				{
-					name: 'No',
+					name: 'normalize.css',
+					value: 'normalize',
+				},
+				{
+					name: 'No, thanks, i will be a fighter',
 					value: false,
 				},
 			],
