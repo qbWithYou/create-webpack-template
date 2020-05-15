@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { promisify } from 'util';
 
 export function generatePackageFile(projectName) {
 	const PROJECT_DIRECTORY = path.join(process.env.PWD, projectName);
@@ -22,9 +23,8 @@ export function generatePackageFile(projectName) {
 		4
 	);
 
-	fs.writeFile(
+	return promisify(fs.writeFile)(
 		path.join(PROJECT_DIRECTORY, 'package.json'),
 		value,
-		function() {},
 	);
 }

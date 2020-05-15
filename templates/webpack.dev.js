@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackAbsolutePathPlugin = require('webpack-absolute-path-plugin');
 const fs = require('fs');
 
 module.exports = {
@@ -27,7 +26,6 @@ module.exports = {
 		hot: true,
 		open: true,
 	},
-
 	module: {
 		rules: [
 			{
@@ -47,26 +45,13 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.worker\.js$/,
-				use: { loader: 'worker-loader' }
-			},
-			{
 				test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.webp|\.jpe?g|\.gif$|\.mp4$|\.webm$|\.mp3$/,
 				loader: 'file-loader'
 			}
 		]
 	},
-
-	optimization: {
-		// removeAvailableModules: false, // Если кодовая база разрослась, то раскомментить это
-		// removeEmptyChunks: false, // Если кодовая база разрослась, то раскомментить это
-		// splitChunks: false, // Если кодовая база разрослась, то раскомментить это
-	},
-
 	plugins: [
 		...generateHtmlPlugins(path.resolve(__dirname, 'src/html/views')),
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.EnvironmentPlugin({ NODE_ENV: 'dev' })
 	]
 };
 

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { promisify } from 'util';
 
 const USER_CURRENT_LOCATION = process.env.PWD;
 
