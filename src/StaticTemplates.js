@@ -17,6 +17,7 @@ export class StaticTemplates {
 	checkConfigAndCopyFiles() {
 		const tasks = [
 			this.copyScriptTemplate(),
+			this.copyImage(),
 		];
 
 		if (this.config.cssUtil) {
@@ -27,6 +28,12 @@ export class StaticTemplates {
 
 		if (this.config.gitignore) {
 			tasks.push(this.copyGitIgnore());
+		}
+
+		if (this.config.usePug) {
+			tasks.push(this.copyPugTemplate());
+		} else {
+			tasks.push(this.copyHtmlTemplate());
 		}
 
 		return Promise.all(tasks);
@@ -90,5 +97,32 @@ export class StaticTemplates {
 			path.join(__dirname, '..', 'templates', '.gitignore'),
 			path.join(this.projectDir, '.gitignore'),
 		);
+	}
+
+	copyImage() {
+		return copyFile(
+			path.join(__dirname, '..', 'templates', 'images', 'bg.png'),
+			path.join(this.projectDir, 'src', 'assets', 'images', 'bg.png'),
+		);
+	}
+
+	copyHtmlTemplate() {
+		return copyFile(
+			path.join(__dirname, '..', 'templates', 'markup', 'html', 'index.html'),
+			path.join(this.projectDir, 'src', 'markup', 'index.html'),
+		);
+	}
+
+	copyPugTemplate() {
+		return Promise.all([
+			copyFile(
+				path.join(__dirname, '..', 'templates', 'markup', 'pug', 'views', 'index.pug'),
+				path.join(this.projectDir, 'src', 'markup', 'views', 'index.pug'),
+			),
+			copyFile(
+				path.join(__dirname, '..', 'templates', 'markup', 'pug', 'templates', 'content.pug'),
+				path.join(this.projectDir, 'src', 'markup', 'templates', 'content.pug'),
+			),
+		]);
 	}
 }

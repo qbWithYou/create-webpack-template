@@ -8,7 +8,7 @@ import { WebpackConfig } from './WebpackConfig';
 export async function cli(args) {
 	const config = await getConfigOptions();
 
-	createProjectDirectories(config.projectName);
+	createProjectDirectories(config);
 	await new StaticTemplates(config).checkConfigAndCopyFiles();
 	await new WebpackConfig(config).generateAndCopyConfigs();
 	await generatePackageFile(config.projectName);

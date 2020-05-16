@@ -4,6 +4,7 @@ import { parse } from '@babel/parser';
 import generate from '@babel/generator';
 import { getWebpackDevConfig } from '../templates/webpack/dev';
 import { stylesConfig } from '../templates/webpack/stylesConfig';
+import { markupConfig } from '../templates/webpack/markupConfig';
 
 export class WebpackConfig {
 	config;
@@ -17,9 +18,14 @@ export class WebpackConfig {
 	}
 
 	generateAndCopyDevConfig() {
+		const markupFormat = this.config.usePug ? 'pug' : 'html';
 		const ast = parse(
 			getWebpackDevConfig({
-				rules: stylesConfig[this.config.preprocessor].dev.rules,
+				rules: `
+					${stylesConfig[this.config.preprocessor].dev.rules}
+					${markupConfig[markupFormat].dev.rules}
+				`,
+				plugins: markupConfig[markupFormat].dev.plugins,
 			}),
 		);
 

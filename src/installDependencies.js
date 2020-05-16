@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 
-export function installDependencies({ projectName, preprocessor }) {
+export function installDependencies({ projectName, preprocessor, usePug }) {
 	const dependencies = [
 		'webpack',
 		'webpack-cli',
@@ -9,8 +9,9 @@ export function installDependencies({ projectName, preprocessor }) {
 		'babel-loader',
 		'file-loader',
 		'css-loader',
-		'html-webpack-plugin',
+		'html-loader',
 		'style-loader',
+		'html-webpack-plugin',
 		'terser-webpack-plugin',
 		'clean-webpack-plugin',
 	];
@@ -25,6 +26,10 @@ export function installDependencies({ projectName, preprocessor }) {
 			dependencies,
 			['less-loader'],
 		);
+	}
+
+	if (usePug) {
+		dependencies.push('pug-html-loader');
 	}
 
 	console.log('Installing dependencies');

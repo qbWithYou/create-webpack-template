@@ -10,7 +10,7 @@ export function generatePackageFile(projectName) {
 			name: projectName,
 			description: '',
 			scripts: {
-				start: 'webpack-dev-server --open --config webpack.dev.js',
+				start: 'webpack-dev-server --config webpack.dev.js',
 				build: 'webpack --config webpack.prod.js',
 			},
 			version: "1.0.0",

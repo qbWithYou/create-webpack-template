@@ -1,4 +1,4 @@
-export function getWebpackDevConfig({ rules }) {
+export function getWebpackDevConfig({ rules, plugins }) {
 	return `
 		const webpack = require('webpack');
 		const path = require('path');
@@ -10,7 +10,7 @@ export function getWebpackDevConfig({ rules }) {
 			entry: __dirname + '/src/scripts/app.js',
 			output: {
 				filename: 'index.js',
-				path: path.resolve(__dirname, 'public'),
+				path: path.resolve(__dirname, 'public/build'),
 			},
 			resolve: {
 				modules: [
@@ -20,8 +20,6 @@ export function getWebpackDevConfig({ rules }) {
 			},
 			devtool: 'cheap-module-eval-source-map',
 			devServer: {
-				contentBase: 'public',
-				publicPath: '',
 				host: 'localhost',
 				port: '8000',
 				compress: false,
@@ -32,23 +30,36 @@ export function getWebpackDevConfig({ rules }) {
 				rules: [
 					${rules}
 					{
-						test: /\.(pug|html)$/,
-						use: [
-							{
-								loader: 'pug-loader',
-							}
-						]
+						test: /\.(mp4|webm)$/,
+						use: {
+							loader: 'file-loader',
+							options: {
+								outputPath: 'images',
+							},
+						},
 					},
 					{
-						test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.webp|\.jpe?g|\.gif$|\.mp4$|\.webm$|\.mp3$/,
-						loader: 'file-loader'
-					}
+						test: /\.(woff|woff2)$/,
+						use: {
+							loader: 'file-loader',
+							options: {
+								outputPath: 'fonts',
+							},
+						},
+					},
+					{
+						test: /\.(png|svg|jpe?g|gif|webp)$/,
+						use: {
+							loader: 'file-loader',
+							options: {
+								outputPath: 'images',
+							},
+						},
+					},
 				]
 			},
 			plugins: [
-				new HtmlWebpackPlugin(),
-				//...generateHtmlPlugins(path.resolve(__dirname, 'src/markup')),
-				//new webpack.HotModuleReplacementPlugin(),
+				${plugins}
 			]
 		};
 	

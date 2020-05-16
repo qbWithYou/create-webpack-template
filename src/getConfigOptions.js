@@ -34,15 +34,15 @@ export async function getConfigOptions() {
 			message: 'Choose CSS preprocessor:',
 			choices: [
 				{
-					name: 'Sass',
+					name: 'sass',
 					value: 'sass',
 				},
 				{
-					name: 'Scss',
+					name: 'scss',
 					value: 'scss',
 				},
 				{
-					name: 'Less',
+					name: 'less',
 					value: 'less',
 				},
 				{
@@ -66,6 +66,21 @@ export async function getConfigOptions() {
 				},
 				{
 					name: 'No, thanks, i will be a fighter',
+					value: false,
+				},
+			],
+		},
+		{
+			type: 'list',
+			name: 'usePug',
+			message: 'Use pug for preprocessing html?',
+			choices: [
+				{
+					name: 'Yes',
+					value: true,
+				},
+				{
+					name: 'No',
 					value: false,
 				},
 			],
