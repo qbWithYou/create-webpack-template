@@ -13,7 +13,18 @@ export const stylesConfig = {
 			`,
 		},
 		prod: {
-
+			rules: `
+				{
+					test: /\.s[ac]ss$/,
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+						},
+						'css-loader',
+						'sass-loader',
+					],
+				},
+			`,
 		},
 	},
 	scss: {
@@ -25,6 +36,20 @@ export const stylesConfig = {
 						'style-loader',
 						'css-loader',
 						'sass-loader'
+					],
+				},
+			`,
+		},
+		prod: {
+			rules: `
+				{
+					test: /\.s[ac]ss$/,
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+						},
+						'css-loader',
+						'sass-loader',
 					],
 				},
 			`,
@@ -43,6 +68,20 @@ export const stylesConfig = {
 				},
 			`,
 		},
+		prod: {
+			rules: `
+				{
+					test: /\.less$/,
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+						},
+						'css-loader',
+						'less-loader',
+					],
+				},
+			`,
+		},
 	},
 	css: {
 		dev: {
@@ -51,6 +90,19 @@ export const stylesConfig = {
 					test: /\.css$/,
 					use: [
 						'style-loader',
+						'css-loader',
+					],
+				},
+			`,
+		},
+		prod: {
+			rules: `
+				{
+					test: /\.css$/,
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+						},
 						'css-loader',
 					],
 				},

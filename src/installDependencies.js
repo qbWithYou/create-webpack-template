@@ -4,6 +4,7 @@ export function installDependencies({ projectName, preprocessor, usePug }) {
 	const dependencies = [
 		'webpack',
 		'webpack-cli',
+		'webpack-merge',
 		'webpack-dev-server',
 		'@babel/core',
 		'babel-loader',
@@ -12,8 +13,10 @@ export function installDependencies({ projectName, preprocessor, usePug }) {
 		'html-loader',
 		'style-loader',
 		'html-webpack-plugin',
-		'terser-webpack-plugin',
 		'clean-webpack-plugin',
+		'terser-webpack-plugin',
+		'mini-css-extract-plugin',
+		'optimize-css-assets-webpack-plugin',
 	];
 
 	if (/s[ac]ss/.test(preprocessor)) {
