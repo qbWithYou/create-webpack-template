@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
+import { getPackageJSON } from '../templates/packagejson';
 
 const copyFile = promisify(fs.copyFile);
 const writeFile = promisify(fs.writeFile);
@@ -18,16 +19,14 @@ export class StaticTemplates {
 		const tasks = [
 			this.copyScriptTemplate(),
 			this.copyImage(),
+			this.copyGitIgnore(),
+			this.copyPackageJSON(),
 		];
 
 		if (this.config.cssUtil) {
 			tasks.push(this.copyStylesTemplateWithCssUtil());
 		} else {
 			tasks.push(this.copyStylesTemplate());
-		}
-
-		if (this.config.gitignore) {
-			tasks.push(this.copyGitIgnore());
 		}
 
 		if (this.config.usePug) {
@@ -37,6 +36,20 @@ export class StaticTemplates {
 		}
 
 		return Promise.all(tasks);
+	}
+
+	copyPackageJSON() {
+		return writeFile(
+			path.join(this.projectDir, 'package.json'),
+			getPackageJSON(this.config.projectName),
+		);
+	}
+
+	copyGitIgnore() {
+		return copyFile(
+			path.join(__dirname, '..', 'templates', 'gitignore.txt'),
+			path.join(this.projectDir, '.gitignore'),
+		);
 	}
 
 	copyStylesTemplate() {
@@ -89,13 +102,6 @@ export class StaticTemplates {
 		return writeFile(
 			path.join(this.projectDir, 'src/scripts/app.js'),
 			scriptTemplateValue,
-		);
-	}
-
-	copyGitIgnore() {
-		return copyFile(
-			path.join(__dirname, '..', 'templates', '.gitignore'),
-			path.join(this.projectDir, '.gitignore'),
 		);
 	}
 

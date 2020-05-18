@@ -1,5 +1,19 @@
 import inquirer from 'inquirer';
 
+/**
+ *
+ * @typedef {Object} Config
+ *
+ * @property {string} projectName
+ * @property {string} preprocessor
+ * @property {string} cssUtil
+ * @property {boolean} usePug
+ */
+
+/**
+ *
+ * @return {Config}
+ */
 export async function getConfigOptions() {
 	const questions = [
 		{
@@ -12,21 +26,6 @@ export async function getConfigOptions() {
 					? true
 					: 'Incorrect project name';
 			},
-		},
-		{
-			type: 'list',
-			name: 'gitignore',
-			message: 'Include .gitignore?',
-			choices: [
-				{
-					name: 'Yes',
-					value: true,
-				},
-				{
-					name: 'No',
-					value: false,
-				},
-			],
 		},
 		{
 			type: 'list',

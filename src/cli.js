@@ -1,16 +1,14 @@
 import { getConfigOptions } from './getConfigOptions';
-import { createProjectDirectories } from './createProjectDirectories';
-import { installDependencies } from './installDependencies';
-import { generatePackageFile } from './generatePackageFile';
+import { Dependencies } from './installDependencies';
 import { StaticTemplates } from './StaticTemplates';
 import { WebpackConfig } from './WebpackConfig';
+import { TemplateDirectories } from './TemplateDirectories';
 
 export async function cli(args) {
 	const config = await getConfigOptions();
 
-	createProjectDirectories(config);
+	new TemplateDirectories(config).createDirectories();
 	await new StaticTemplates(config).checkConfigAndCopyFiles();
 	await new WebpackConfig(config).generateAndCopyConfigs();
-	await generatePackageFile(config.projectName);
-	installDependencies(config);
+	new Dependencies(config).install();
 }
