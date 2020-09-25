@@ -3,7 +3,7 @@ export function getWebpackProdConfig({ rules, plugins }) {
 		const fs = require('fs');
 		const path = require('path');
 		const webpack = require('webpack');
-		const merge = require('webpack-merge');
+		const { merge } = require('webpack-merge');
 		const commonConfig = require('./webpack.common.js');
 		const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 		const TerserWebpackPlugin = require('terser-webpack-plugin');
